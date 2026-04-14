@@ -297,26 +297,145 @@
 //   }
 // }
 // getUserById(1);
-async function createPost() {
-  try {
-    const newPost = {
-      title: "Моя первая запись",
-      body: "Это содержание моей первой записи в блоге",
-      userId: 1,
-    };
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPost),
-    });
-    const createdPost = await response.json();
-    console.log("Создана новая запись:");
-    console.log("ID:", createdPost.id);
-    console.log("Заголовок: ", createdPost.title);
-  } catch (error) {
-    console.log("Ошибка при создании записи:", error.message);
-  }
+// async function createPost() {
+//   try {
+//     const newPost = {
+//       title: "Моя первая запись",
+//       body: "Это содержание моей первой записи в блоге",
+//       userId: 1,
+//     };
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(newPost),
+//     });
+//     const createdPost = await response.json();
+//     console.log("Создана новая запись:");
+//     console.log("ID:", createdPost.id);
+//     console.log("Заголовок: ", createdPost.title);
+//   } catch (error) {
+//     console.log("Ошибка при создании записи:", error.message);
+//   }
+// }
+// createPost();
+// console.log("Optional Chaining");
+// const user1 = {
+//   name: "Андрей",
+//   address: {
+//     city: "Волжский",
+//     street: "Пушкина",
+//   },
+// };
+// const user2 = {
+//   name: "Дмитрий",
+// };
+// const city2 = user2.address?.city;
+// console.log("Город (новый способ):", city2);
+// const street = user1.address?.street;
+// console.log("Улица:", street);
+// const admin = {
+//   name: "Администратор",
+//   permissions: {
+//     canDelete: () => true,
+//   },
+// };
+// const guest = {
+//   name: "Гость",
+// };
+// console.log("Админ может удалять?", admin.permissions?.canDelete?.());
+// console.log("Гость может удалять?", guest.permissions?.canDelete?.());
+// const company = {
+//   name: "Tech Corp",
+//   employees: [
+//     { name: "Надежда", role: "Developer" },
+//     { name: "Анна", role: "Designer" },
+//   ],
+// };
+// const startup = {
+//   name: "New Startup",
+// };
+// console.log("Первый сотрудник: ", company.employees?.[0]?.name);
+// console.log("Первый сотрудник стартапа: ", startup.employees?.[0]?.name);
+// console.log("Nullish Coalescing");
+// const value1 = 0;
+// const value2 = "";
+// const value3 = false;
+// const value4 = null;
+// const value5 = undefined;
+// console.log('value1 || "default":', value1 || "default");
+// console.log('value2 || "default":', value2 || "default");
+// console.log('value3 || "default":', value3 || "default");
+// console.log('value1 ?? "default":', value1 ?? "default");
+// console.log('value2 ?? "default":', value2 ?? "default");
+// console.log('value3 ?? "default":', value3 ?? "default");
+// console.log('value4 ?? "default":', value4 ?? "default");
+// console.log('value5 ?? "default":', value5 ?? "default");
+// function displayUserSettings(settings) {
+//   const theme = settings?.theme ?? "light";
+//   const fontSize = settings?.fontSize ?? 14;
+//   const notifications = settings?.notifications ?? true;
+//   console.log("Настройки пользователя:");
+//   console.log("Тема:", theme);
+//   console.log("Размер шрифта:", fontSize);
+//   console.log("Уведомления:", notifications);
+// }
+// displayUserSettings({ theme: "dark", fontSize: 16 });
+// displayUserSettings({ notifications: false });
+// displayUserSettings({});
+// const apiResponse = {
+//   data: {
+//     user: {
+//       profile: {
+//         settings: {
+//           language: "ru",
+//         },
+//       },
+//     },
+//   },
+// };
+// const language = apiResponse?.data?.user?.profile?.settings?.language ?? "en";
+// console.log("Язык:", language);
+// const emptyResponse = {};
+// const defaultLanguage = emptyResponse?.data?.user?.profile?.settings?.language ?? "en";
+// console.log("Язык по умолчанию:", defaultLanguage);
+// Объект заказа с полными данными
+const order = {
+  customer: {
+    name: "Анна Иванова",
+    phone: "+7 (999) 123-45-67",
+  },
+  shipping: {
+    address: "г. Волжский, ул. Ленина, д. 15, кв. 42",
+    date: "14.05.2026",
+  },
+  payment: {
+    type: "карта",
+    amount: 5990,
+  },
+};
+const emptyOre = {
+  customer: {
+    name: "Иван Петров",
+    phone: undefined,
+  },
+  shipping: {
+    address: undefined,
+    date: null,
+  },
+};
+function displayOrder(order) {
+  console.log("Заказ:");
+  console.log("Клиент:");
+  console.log(`Имя: ${order.customer?.name ?? "Не указано"}`);
+  console.log(`Телефон: ${order.customer?.phone ?? "Не указан"}`);
+  console.log("Доставка:");
+  console.log(`Адрес: ${order.shipping?.address ?? "Не указан"}`);
+  console.log(`Дата: ${order.shipping?.date ?? "Не назначена"}`);
+  console.log("Оплата:");
+  console.log(`Тип: ${order.payment?.type ?? "Не указан"}`);
+  console.log(`Сумма: ${order.payment?.amount ?? 0} руб.`);
 }
-createPost();
+displayOrder(order);
+displayOrder(emptyOre);
