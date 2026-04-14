@@ -120,13 +120,13 @@
 // simplePromise
 //   .then((result) => console.log("Результат:", result))
 //   .catch((error) => console.log("Ошибка: ", error));
-function delay(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(`Прошло ${ms} миллисекунд `);
-    }, ms);
-  });
-}
+// function delay(ms) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(`Прошло ${ms} миллисекунд `);
+//     }, ms);
+//   });
+// }
 // delay(1000).then((message) => console.log(message));
 // function fetchUserData(userId) {
 //   return new Promise((resolve, reject) => {
@@ -252,18 +252,71 @@ function delay(ms) {
 //   return "Ужин готов быстрее!";
 // }
 // cookDinnerFast().then((result) => console.log(result));
-async function processOrder() {
+// async function processOrder() {
+//   try {
+//     console.log("Оформляем заказ...");
+//     const item = await delay(1000).then(() => "Товар в наличии");
+//     console.log(item);
+//     const sale = await delay(500).then(() => "Стоимость рассчитана");
+//     console.log(sale);
+//     const appr = await delay(700).then(() => "Заказ подтверждён");
+//     console.log(appr);
+//     return "Заказ оформлен";
+//   } catch (error) {
+//     console.log("Поймана ошибка: ", error);
+//   }
+// }
+// processOrder().then((result) => console.log(result));
+// console.log("Fetch API");
+// async function getUsers() {
+//   try {
+//     const response = await fetch(" https://jsonplaceholder.typicode.com/users");
+//     if (!response.ok) {
+//       throw new Error(`HTTP ошибка! Статус: ${response.status}`);
+//     }
+//     const users = await response.json();
+//     console.log("Первые 3 пользователя:");
+//     users.slice(0, 3).forEach((user) => {
+//       console.log(`- ${user.name} (${user.email})`);
+//     });
+//   } catch (error) {
+//     console.log("Ошибка при загрузке пользователей:", error.message);
+//   }
+// }
+// getUsers();
+// async function getUserById(id) {
+//   try {
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+//     const user = await response.json();
+//     console.log(`Пользователь #${id}:`);
+//     console.log(`Имя: ${user.name}`);
+//     console.log(`Город: ${user.address.city}`);
+//     console.log(`Компания: ${user.company.name}`);
+//   } catch (error) {
+//     console.log("Ошибка:", error.message);
+//   }
+// }
+// getUserById(1);
+async function createPost() {
   try {
-    console.log("Оформляем заказ...");
-    const item = await delay(1000).then(() => "Товар в наличии");
-    console.log(item);
-    const sale = await delay(500).then(() => "Стоимость рассчитана");
-    console.log(sale);
-    const appr = await delay(700).then(() => "Заказ подтверждён");
-    console.log(appr);
-    return "Заказ оформлен";
+    const newPost = {
+      title: "Моя первая запись",
+      body: "Это содержание моей первой записи в блоге",
+      userId: 1,
+    };
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    });
+    const createdPost = await response.json();
+    console.log("Создана новая запись:");
+    console.log("ID:", createdPost.id);
+    console.log("Заголовок: ", createdPost.title);
   } catch (error) {
-    console.log("Поймана ошибка: ", error);
+    console.log("Ошибка при создании записи:", error.message);
   }
 }
-processOrder().then((result) => console.log(result));
+createPost();
